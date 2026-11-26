@@ -513,3 +513,10 @@ main {position:relative!important;z-index:2!important;background:transparent!imp
 #ntpure-wallpaper-photo {position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;display:block;opacity:1!important;visibility:visible!important;z-index:0!important;}
 #ntpure-wallpaper-shade {position:absolute!important;inset:0!important;z-index:1!important;pointer-events:none!important;}
 body > main {position:relative!important;z-index:2!important;background:transparent!important;}
+
+/* v2.2.2: anchor the whole grid, not its centre, at the bottom. */
+.shortcuts[data-grid-anchor="bottom"] {top:auto;bottom:calc(54px + env(safe-area-inset-bottom, 0px));transform:none;max-height:calc(100dvh - 70px);}
+.shortcuts[data-grid-anchor="centre"] {top:50%;bottom:auto;transform:translateY(-50%);}
+.shortcuts[data-grid-anchor="top"] {top:54px;bottom:auto;transform:none;max-height:calc(100dvh - 110px);}
+.clock-panel:not([hidden]) ~ .shortcuts[data-grid-anchor="top"] {top:calc(13dvh + 100px);max-height:calc(87dvh - 154px);}
+@media (max-height:620px) { .clock-panel:not([hidden]) ~ .shortcuts[data-grid-anchor="top"] {top:calc(7dvh + 80px);max-height:calc(93dvh - 134px);} }
