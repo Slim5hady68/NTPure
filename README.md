@@ -1,19 +1,37 @@
-# NTPure — Minimalist Customisable New Tab Page
+<h1 align="center">NTPure</h1>
+<p align="center"><strong>Minimalist by design. Personalised by you.</strong></p>
+<p align="center">
+  <a href="https://github.com/Slim5hady68/NTPure/releases/latest"><img alt="Release v2.2.2" src="https://img.shields.io/badge/release-v2.2.2-238636"></a>
+  <img alt="Platform Web" src="https://img.shields.io/badge/platform-Web-2879b9">
+  <img alt="AMOLED" src="https://img.shields.io/badge/theme-AMOLED-black">
+  <img alt="Free" src="https://img.shields.io/badge/price-Free-238636">
+</p>
+<p align="center">A lightweight, customisable New Tab Page for a cleaner, more personal browsing experience. True-black AMOLED or your own wallpaper, with no built-in search bar or unnecessary clutter.</p>
+<p align="center"><a href="https://slim5hady68.github.io/NTPure/"><strong>Launch NTPure</strong></a> · <a href="https://github.com/Slim5hady68/NTPure/releases/latest">Latest release</a></p>
 
-**Version 2.2.2 Final** · **Authored by JT26-AI**
-
-NTPure is a lightweight, customisable New Tab Page with an optional true-black AMOLED background or your own wallpaper. Keep your favourite websites within reach, arrange shortcuts your way, and enjoy a clean interface without a built-in search bar or unnecessary clutter.
-
-**Try NTPure:** https://slim5hady68.github.io/NTPure/
-
-## Screenshots
+## Less clutter. More you.
 
 <p align="center">
-  <a href="images/smoked-glass.png"><img src="images/smoked-glass.png" alt="NTPure Smoked Glass shortcuts" width="30%"></a>
-  <a href="images/settings.png"><img src="images/settings.png" alt="NTPure settings with expandable Shortcut Grid Layout controls" width="30%"></a>
-  <a href="images/shortcut-editor.png"><img src="images/shortcut-editor.png" alt="NTPure shortcut editor" width="30%"></a>
+  <a href="images/readme-amoled.webp"><img src="images/readme-amoled.webp" alt="Pure AMOLED with one bottom-aligned row" width="23%"></a>
+  <a href="images/readme-wallpaper.webp"><img src="images/readme-wallpaper.webp" alt="Custom wallpaper with two shortcut rows" width="23%"></a>
+  <a href="images/readme-settings.webp"><img src="images/readme-settings.webp" alt="Settings panel" width="23%"></a>
+  <a href="images/readme-shortcut-editor.webp"><img src="images/readme-shortcut-editor.webp" alt="Shortcut editor" width="23%"></a>
 </p>
-<p align="center"><sub>Smoked Glass icons · Grid layout settings · Shortcut editor (tap an image for full size)</sub></p>
+<p align="center"><sub>Pure minimalism · Personal wallpapers · Intuitive settings · Custom shortcuts<br>Tap any screenshot to enlarge.</sub></p>
+
+## Getting started
+
+**NTPure is a web-based page, not a browser extension.** To replace your browser’s New Tab Page, you need native support for custom New Tab URLs or a compatible extension.
+
+### BareBrowser on Android
+
+1. Install or enable the **Custom New Tab URL** extension.
+2. Set its URL to `https://slim5hady68.github.io/NTPure/`.
+3. Save and open a new tab.
+
+### Other browsers
+
+If your browser supports a custom homepage, you can use the same URL as your homepage. To replace the New Tab Page, use a compatible Custom New Tab extension if native support is unavailable. Browser and extension compatibility varies.
 
 ## Features
 
@@ -26,18 +44,6 @@ NTPure is a lightweight, customisable New Tab Page with an optional true-black A
 - **Backup and restore:** Export shortcuts, icon choices, uploaded icon images, wallpapers, and preferences to a JSON file.
 - **Custom wallpaper:** Upload a JPG, PNG or WebP background image, and adjust its darkness with a slider; AMOLED black remains the default.
 - **Local storage and caching:** Your setup stays in your browser, while service-worker caching can improve repeat load times.
-
-## Getting Started
-
-Open **https://slim5hady68.github.io/NTPure/**.
-
-### Use with BareBrowser on Android
-
-1. Install or enable the **Custom New Tab URL** extension.
-2. Set its URL to `https://slim5hady68.github.io/NTPure/`.
-3. Save and open a new tab.
-
-Other browsers may offer different ways to configure a custom New Tab Page.
 
 ## How to Use
 
@@ -106,3 +112,5 @@ Wallpapers are stored locally in your browser and included in exported JSON back
 **Icon concept credit: DrumDestroyer**
 
 *Minimalist by design. Personalised by you.*
+
+If you enjoy NTPure, consider giving the repository a star.
