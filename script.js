@@ -510,7 +510,7 @@ const clockPanel = document.getElementById("clock-panel");
 const clockTime = document.getElementById("clock-time");
 const clockDate = document.getElementById("clock-date");
 
-let preferences = { showClock: true, gridColumns: 4, gridRows: 2, gridPosition: 66, gridAnchor: "default", iconSize: "medium", showLabels: true, iconStyle: "floating" };
+let preferences = { showClock: true, gridColumns: 4, gridRows: 2, gridBottomPosition: 80, iconSize: "medium", showLabels: true, iconStyle: "floating" };
 
 function loadPreferences() {
   const oldLayout = `${preferences.gridColumns}|${preferences.gridRows}|${preferences.iconSize}|${preferences.iconStyle}|${preferences.showLabels}`;
@@ -519,8 +519,7 @@ function loadPreferences() {
   preferences.showClock = typeof saved.showClock === "boolean" ? saved.showClock : true;
   preferences.gridColumns = [4,5,6].includes(Number(saved.gridColumns)) ? Number(saved.gridColumns) : 4;
   preferences.gridRows = [1,2,3].includes(Number(saved.gridRows)) ? Number(saved.gridRows) : 2;
-  preferences.gridPosition = Number.isFinite(Number(saved.gridPosition)) && Number(saved.gridPosition) >= 25 && Number(saved.gridPosition) <= 80 ? Number(saved.gridPosition) : 66;
-  preferences.gridAnchor = ["default","top","centre","bottom"].includes(saved.gridAnchor) ? saved.gridAnchor : "default";
+  preferences.gridBottomPosition = Number.isFinite(Number(saved.gridBottomPosition)) && Number(saved.gridBottomPosition) >= 25 && Number(saved.gridBottomPosition) <= 80 ? Number(saved.gridBottomPosition) : 80;
   preferences.iconSize = ["small","medium","large"].includes(saved.iconSize) ? saved.iconSize : "medium";
   preferences.showLabels = typeof saved.showLabels === "boolean" ? saved.showLabels : true;
   preferences.iconStyle = ["floating","tiles","glass"].includes(saved.iconStyle) ? saved.iconStyle : "floating";
@@ -533,9 +532,7 @@ function loadPreferences() {
 }
 function applyShortcutAppearance() {
   shortcuts.style.setProperty("--grid-columns", String(preferences.gridColumns));
-  shortcuts.style.setProperty("--grid-position", String(preferences.gridPosition) + "%");
-  shortcuts.dataset.gridAnchor = preferences.gridAnchor;
-  requestAnimationFrame(positionEditModeBar);
+  shortcuts.style.setProperty("--grid-lift", String((80 - preferences.gridBottomPosition) * 0.5) + "vh");
   shortcuts.dataset.iconSize = preferences.iconSize;
   shortcuts.dataset.iconStyle = preferences.iconStyle;
   shortcuts.classList.toggle("hide-labels", !preferences.showLabels);

@@ -3,7 +3,7 @@ const STORAGE_KEY = "amoled-ntp-shortcuts-v2";
 const SETTINGS_KEY = "ntp-am-settings-v1";
 const WALLPAPER_KEY = "ntp-am-wallpaper-v1";
 const TOTAL_SLOTS = 18;
-const DEFAULT_PREFS = {showClock:true, gridColumns:4, gridRows:2, gridPosition:66, gridAnchor:"default", iconSize:"medium", showLabels:true, iconStyle:"floating"};
+const DEFAULT_PREFS = {showClock:true, gridColumns:4, gridRows:2, gridBottomPosition:80, iconSize:"medium", showLabels:true, iconStyle:"floating"};
 const showClock = document.getElementById("show-clock");
 const backupInput = document.getElementById("backup-file");
 const status = document.getElementById("status");
@@ -15,8 +15,7 @@ function readPreferences() {
     showClock: typeof saved.showClock === "boolean" ? saved.showClock : true,
     gridColumns: [4,5,6].includes(Number(saved.gridColumns)) ? Number(saved.gridColumns) : 4,
     gridRows: [1,2,3].includes(Number(saved.gridRows)) ? Number(saved.gridRows) : 2,
-    gridPosition: Number.isFinite(Number(saved.gridPosition)) && Number(saved.gridPosition)>=25 && Number(saved.gridPosition)<=80 ? Number(saved.gridPosition) : 66,
-    gridAnchor: ["default","top","centre","bottom"].includes(saved.gridAnchor) ? saved.gridAnchor : "default",
+    gridBottomPosition: Number.isFinite(Number(saved.gridBottomPosition)) && Number(saved.gridBottomPosition)>=25 && Number(saved.gridBottomPosition)<=80 ? Number(saved.gridBottomPosition) : 80,
     iconSize: ["small","medium","large"].includes(saved.iconSize) ? saved.iconSize : "medium",
     showLabels: typeof saved.showLabels === "boolean" ? saved.showLabels : true,
     iconStyle: ["floating","tiles","glass"].includes(saved.iconStyle) ? saved.iconStyle : "floating"
@@ -43,16 +42,11 @@ const rowButtons = [...document.querySelectorAll('[data-rows]')];
 function updateRowButtons(value) { rowButtons.forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.rows)===Number(value)))); }
 updateRowButtons(readPreferences().gridRows);
 rowButtons.forEach(b=>b.addEventListener('click',()=>{const value=Number(b.dataset.rows);savePreference('gridRows',value);updateRowButtons(value);}));
-const anchorSelect=document.getElementById('grid-anchor');
-const customPosition=document.getElementById('custom-position');
-function syncAnchor(value){anchorSelect.value=value;customPosition.hidden=value!=='default';}
-syncAnchor(readPreferences().gridAnchor);
-anchorSelect.addEventListener('change',()=>{syncAnchor(anchorSelect.value);savePreference('gridAnchor',anchorSelect.value);});
 const positionSlider=document.getElementById('grid-position');
 const positionOutput=document.getElementById('grid-position-value');
-function syncPosition(value){positionSlider.value=value;positionOutput.textContent=value<52?'Higher':value>70?'Lower':'Centre';}
-syncPosition(readPreferences().gridPosition);
-positionSlider.addEventListener('input',()=>{syncPosition(Number(positionSlider.value));savePreference('gridPosition',Number(positionSlider.value));});
+function syncPosition(value){positionSlider.value=value;positionOutput.textContent=value===80?'Bottom':value<45?'Higher':'Raised';}
+syncPosition(readPreferences().gridBottomPosition);
+positionSlider.addEventListener('input',()=>{syncPosition(Number(positionSlider.value));savePreference('gridBottomPosition',Number(positionSlider.value));});
 const iconSizeSelect = document.getElementById("icon-size");
 const labelsToggle = document.getElementById("show-labels");
 const iconStyleSelect = document.getElementById("icon-style");
@@ -113,8 +107,7 @@ function validateBackup(data) {
     showClock: typeof raw.showClock === "boolean" ? raw.showClock : true,
     gridColumns: [4,5,6].includes(Number(raw.gridColumns)) ? Number(raw.gridColumns) : 4,
     gridRows: [1,2,3].includes(Number(raw.gridRows)) ? Number(raw.gridRows) : 2,
-    gridPosition: Number.isFinite(Number(raw.gridPosition)) && Number(raw.gridPosition)>=25 && Number(raw.gridPosition)<=80 ? Number(raw.gridPosition) : 66,
-    gridAnchor: ["default","top","centre","bottom"].includes(raw.gridAnchor) ? raw.gridAnchor : "default",
+    gridBottomPosition: Number.isFinite(Number(raw.gridBottomPosition)) && Number(raw.gridBottomPosition)>=25 && Number(raw.gridBottomPosition)<=80 ? Number(raw.gridBottomPosition) : 80,
     iconSize: ["small","medium","large"].includes(raw.iconSize) ? raw.iconSize : "medium",
     showLabels: typeof raw.showLabels === "boolean" ? raw.showLabels : true,
     iconStyle: ["floating","tiles","glass"].includes(raw.iconStyle) ? raw.iconStyle : "floating"
@@ -140,8 +133,7 @@ backupInput.addEventListener("change", async () => {
     showClock.checked = restored.preferences.showClock;
     updateColumnButtons(restored.preferences.gridColumns);
     updateRowButtons(restored.preferences.gridRows);
-    syncPosition(restored.preferences.gridPosition);
-    syncAnchor(restored.preferences.gridAnchor);
+    syncPosition(restored.preferences.gridBottomPosition);
     iconSizeSelect.value = restored.preferences.iconSize;
     labelsToggle.checked = restored.preferences.showLabels;
     iconStyleSelect.value = restored.preferences.iconStyle;

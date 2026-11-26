@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000000"><meta name="application-version" content="2.2.2"><title>NTPure settings</title><style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000000"><meta name="application-version" content="2.2.3"><title>NTPure settings</title><style>
 :root{color-scheme:dark;--ink:#e9f3f8;--muted:#a2afb8;--panel:#131c23;--field:#19242c;--line:#3b515e;--accent:#64dfff}
 *{box-sizing:border-box}
 html,body{margin:0;background:#050607;color:var(--ink);font-family:Arial,sans-serif;-webkit-text-size-adjust:100%}
@@ -68,7 +68,7 @@ body.panel-mode .shortcut-management button{margin-top:5px}
 body.panel-mode .backup button{display:inline-flex;width:calc(50% - 5px);margin-right:6px}
 body.panel-mode .backup button+button{margin-right:0}
 body.panel-mode footer{padding-top:5px}
-</style><script>if(new URLSearchParams(location.search).has("panel"))document.addEventListener("DOMContentLoaded",()=>document.body.classList.add("panel-mode"));</script><script src="popup.js?v=222gridanchor" defer></script><script src="settings-ui.js?v=222gridanchor" defer></script><script src="wallpaper.js?v=222gridanchor" defer></script></head><body>
+</style><script>if(new URLSearchParams(location.search).has("panel"))document.addEventListener("DOMContentLoaded",()=>document.body.classList.add("panel-mode"));</script><script src="popup.js?v=223bottomgrid" defer></script><script src="settings-ui.js?v=223bottomgrid" defer></script><script src="wallpaper.js?v=223bottomgrid" defer></script></head><body>
   
   <header>
     <div class="brand-mark">A</div>
@@ -94,11 +94,9 @@ body.panel-mode footer{padding-top:5px}
       <button type="button" class="grid-choice-button" data-rows="2" aria-pressed="true">2 rows</button>
       <button type="button" class="grid-choice-button" data-rows="3" aria-pressed="false">3 rows</button>
     </div>
-    <label for="grid-anchor">Shortcut position</label>
-    <div class="dropdown-shell"><select id="grid-anchor"><option value="default">Default (adjustable)</option><option value="top">Top</option><option value="centre">Centre</option><option value="bottom">Bottom</option></select><svg class="dropdown-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></div>
-    <div id="custom-position"><div class="grid-position-title"><label for="grid-position">Vertical position</label><output id="grid-position-value">Centre</output></div>
-    <input id="grid-position" type="range" min="25" max="80" step="1" value="66">
-    <div class="grid-position-ends"><span>Higher</span><span>Lower</span></div></div>
+    <div class="grid-position-title"><label for="grid-position">Vertical position</label><output id="grid-position-value">Bottom</output></div>
+    <input id="grid-position" type="range" min="25" max="80" step="1" value="80">
+    <div class="grid-position-ends"><span>Higher</span><span>Bottom</span></div>
     <small class="grid-layout-hint">Fewer rows hide extra shortcuts without deleting them.</small></div>
     </details>
     <label for="icon-style">Icon style</label>
@@ -133,5 +131,5 @@ body.panel-mode footer{padding-top:5px}
     <input id="backup-file" type="file" accept="application/json,.json" hidden>
     <p id="status" role="status" aria-live="polite"></p>
   </section>
-  <footer>Authored by JT26-AI · Version 2.2.2</footer>
+  <footer>Authored by JT26-AI · Version 2.2.3</footer>
 </body></html>

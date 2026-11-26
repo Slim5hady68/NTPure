@@ -1,6 +1,6 @@
 # NTPure — Minimalist Customisable New Tab Page
 
-**Version 2.2.2** · **Authored by JT26-AI**
+**Version 2.2.3** · **Authored by JT26-AI**
 
 NTPure is a lightweight, customisable New Tab Page with an optional true-black AMOLED background or your own wallpaper. Keep your favourite websites within reach, arrange shortcuts your way, and enjoy a clean interface without a built-in search bar or unnecessary clutter.
 
@@ -71,7 +71,7 @@ Tap the small grey cog in the bottom-right corner. Under **Icon style**, choose:
 | **Uniform Rounded Tiles** | Consistent rounded-square icon backgrounds |
 | **Smoked Glass** | Glossy, smoky circular icons with highlights and depth |
 
-Open **Shortcut Grid Layout** under **Shortcut appearance** to expand the layout controls. Choose **4, 5 or 6 columns**, **1, 2 or 3 rows**, and use the **Vertical position** slider to move the shortcut grid higher or lower on the screen. Choose Default (adjustable), Top, Centre or Bottom using the Shortcut position dropdown. Choosing fewer rows hides extra shortcuts without deleting them. Tap the layout box again to collapse it.
+Open **Shortcut Grid Layout** under **Shortcut appearance** to expand the layout controls. Choose **4, 5 or 6 columns**, **1, 2 or 3 rows**, and use the **Vertical position** slider to raise the shortcut grid from its default bottom position. Additional rows build upwards without moving the bottom row. Choosing fewer rows hides extra shortcuts without deleting them. Tap the layout box again to collapse it.
 
 You can also change icon size, label visibility, and clock/date display. Your choices are saved automatically.
 
@@ -99,7 +99,7 @@ Wallpapers are stored locally in your browser and included in exported JSON back
 
 ## Credits
 
-**NTPure v2.2.2**  
+**NTPure v2.2.3**  
 **Authored by JT26-AI**  
 **Icon concept credit: DrumDestroyer**
 
