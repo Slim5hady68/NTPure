@@ -11,20 +11,12 @@ let state={image:'',darkness:35};
 try {const stored=JSON.parse(localStorage.getItem(KEY));if(stored && typeof stored==='object')state={image:typeof stored.image==='string'?stored.image:'',darkness:Number.isFinite(Number(stored.darkness))?Math.max(0,Math.min(90,Number(stored.darkness))):35};}catch{}
 const update=()=>{controls.hidden=!state.image;slider.value=String(state.darkness);output.textContent=state.darkness+'%';};
 function persist() {try {if(state.image)localStorage.setItem(KEY,JSON.stringify(state));else localStorage.removeItem(KEY);window.parent.postMessage({type:'ntpam-wallpaper-updated'},location.origin);status.textContent='Background saved.';return true;}catch{status.textContent='Not enough browser storage. Try a smaller wallpaper or export a backup.';return false;}}
-// Preserve the original JPEG/PNG/WebP bytes. No canvas or bitmap conversion:
-// some Android WebViews decode photos but return black pixels from canvas.
+// Preserve original image bytes when storage permits; resize larger images only if needed.
 fileInput.addEventListener('change',async()=>{
  const file=fileInput.files?.[0];
  if(!file){status.textContent='No image selected.';return;}
  if(!['image/png','image/jpeg','image/webp'].includes(file.type)){
   status.textContent='Choose a JPG, PNG or WebP image.';return;
- }
- // LocalStorage can be limited to around 5 MiB; reject large originals rather
- // than silently replacing the current wallpaper or exhausting shortcut storage.
- const MAX_BYTES=3*1024*1024;
- if(file.size>MAX_BYTES){
-  status.textContent='Photo is too large for direct storage (3 MB maximum). Choose a smaller image or use your phone’s photo editor to save a reduced copy.';
-  return;
  }
  status.textContent='Reading original photo without canvas…';
  try{
@@ -45,7 +37,27 @@ fileInput.addEventListener('change',async()=>{
   if(!dimensions[0]||!dimensions[1])throw Error('Photo has no visible dimensions.');
   const previous=state.image;
   state.image=data;
-  if(!persist()){state.image=previous;return;}
+  if(!persist()){
+   state.image=previous;
+   // Larger originals may exceed browser storage. Resize only when necessary.
+   const photo=new Image();
+   await new Promise((resolve,reject)=>{photo.onload=resolve;photo.onerror=reject;photo.src=data;});
+   for(const max of [1920,1280,960,640]){
+    const ratio=Math.min(1,max/Math.max(photo.naturalWidth,photo.naturalHeight));
+    const canvas=document.createElement('canvas');
+    canvas.width=Math.max(1,Math.round(photo.naturalWidth*ratio));
+    canvas.height=Math.max(1,Math.round(photo.naturalHeight*ratio));
+    const ctx=canvas.getContext('2d');
+    if(!ctx)throw Error('Image resizing is unavailable. Try a smaller photo.');
+    ctx.drawImage(photo,0,0,canvas.width,canvas.height);
+    const resized=canvas.toDataURL('image/jpeg',0.85);
+    if(!resized.startsWith('data:image/jpeg;base64,'))throw Error('Image resizing is unavailable. Try a smaller photo.');
+    state.image=resized;
+    if(persist()){update();status.textContent='Wallpaper saved ('+canvas.width+' × '+canvas.height+').';return;}
+    state.image=previous;
+   }
+   return;
+  }
   update();
   status.textContent='Wallpaper saved ('+dimensions.join(' × ')+').';
  }catch(e){status.textContent='Upload failed: '+(e?.message||'Unable to read this photo.');}
